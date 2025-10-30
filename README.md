@@ -12,7 +12,6 @@ pip install -r requirements.txt
 import pandas as pd
 import sklearn
 import xgboost
-print("✓ Ready to start")
 ```
 
 ### 3. Load Data
@@ -60,28 +59,6 @@ df = pd.read_excel('data/SSP_Data.xlsx')
 
 Random split causes data leakage (same supplier in train and test).
 
-Example approaches:
-```python
-# Option 1: GroupShuffleSplit
-from sklearn.model_selection import GroupShuffleSplit
-splitter = GroupShuffleSplit(test_size=0.3, random_state=42)
-train_idx, test_idx = next(splitter.split(X, y, groups=df['ID']))
-
-# Option 2: Manual split
-unique_suppliers = df['ID'].unique()
-train_suppliers, test_suppliers = train_test_split(
-    unique_suppliers, test_size=0.3, random_state=42
-)
-train_mask = df['ID'].isin(train_suppliers)
-```
-
-### ⚠️ Two-Stage Approach
-The assignment requires you to:
-1. **First:** Build models with GI features only
-2. **Then:** Add SAQ features and compare
-
-Don't skip the GI-only stage. Understanding the trade-off is a core learning objective.
-
 ---
 
 ## Data Notes
@@ -93,24 +70,14 @@ Don't skip the GI-only stage. Understanding the trade-off is a core learning obj
 - Example: "Q1272 ranks #1" → "Environment Corrective Action matters most"
 
 ### Missing Values
-- Many SAQ columns have >50% missing (suppliers didn't answer)
-- Consider filtering out high-missing columns
 - Document your approach
 
 ### Geographic Distribution
-- ~93% of suppliers are in China
-- Remaining in India, Germany, Indonesia, Italy, Taiwan, Thailand, Türkiye, Yemen
 - Check for fairness across regions in your analysis
 
 ---
 
 ## Expected Performance Ranges
-
-These are guidelines, not requirements. Your results may vary.
-
-| Metric                    | GI-Only | GI+SAQ | 
-|---------------------------|---------|--------|
-| Improvement over baseline | 3-10%   | 15-30% |
 
 If your results differ but methodology is sound, that's acceptable.
 
@@ -143,7 +110,6 @@ Your brief should include:
 
 **Technical Issues:** [TA Email]  
 **Conceptual Questions:** Office hours [Times]  
-**Grade Questions:** [Instructor Email]
 
 **Reference:** Tan et al. (2024) "Stop Auditing and Start to CARE" - INFORMS Journal on Applied Analytics
 
