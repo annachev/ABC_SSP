@@ -7,14 +7,7 @@
 pip install -r requirements.txt
 ```
 
-### 2. Verify Installation
-```python
-import pandas as pd
-import sklearn
-import xgboost
-```
-
-### 3. Load Data
+### 2. Load Data
 ```python
 df = pd.read_excel('data/SSP_Data.xlsx')
 ```
@@ -36,16 +29,16 @@ df = pd.read_excel('data/SSP_Data.xlsx')
 
 ---
 
-## Data Files
+## Data File
 
-### SSP_Data.xlsx
+### SSP_Data.xlsx - Data Sheet
 - **1,236 assessments** from **463 suppliers** (2016-2025)
 - **Target variable:** `Val_Score` (Overall Sustainability score, 0-1 scale)
 - **Topic scores:** Val_Environment, Val_Health and Safety, Val_Business Ethics, Val_Labor and Human Rights
 - **GI features (31):** Activities, Facilities, Number of workers, Country
 - **SAQ features (~450):** Q-code columns (filter out columns with >50% missing)
 
-### column_explanation.csv
+### SSP_Data.xlsx - Column Explanation
 - Maps Q-codes to topics and chapters
 - Example: Q1272 → Environment - Corrective Action Approach
 - Use this to interpret SAQ feature importance
